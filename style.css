@@ -152,13 +152,20 @@ border:2px solid #93c5fd;
 
 
 .important{
-color:#dc2626 !important;
+color:#dc2626 ;
 font-weight:bold;
 background:#fee2e2;
 padding:8px;
 border-radius:5px;
 }
 
+#important{
+color:#47dc26 ;
+font-weight:bold;
+background:#fee2e2;
+padding:8px;
+border-radius:5px;
+}
 
 
 #contacts{
@@ -175,4 +182,38 @@ margin:20px auto;
 border:none;
 height:2px;
 background:#bfdbfe;
+}
+
+
+.container p {
+  border-left: 4px solid #3b82f6;
+  padding-left: 10px;
+}
+
+
+
+
+.container > p {
+  background: #c2e5ff;
+  border-radius: 6px;
+}
+
+
+
+.container h2 + * {
+  border: 3px solid #000000;
+  padding: 10px;
+}
+
+
+
+
+.container h2 ~ * {
+  background: #f1ff531e;
+  border-radius: 6px;
+}
+
+
+.container iframe {
+  border: 4px solid #1656f9;
 }
