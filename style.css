@@ -205,6 +205,11 @@ ul > li {
   padding: 5px;
 }
 
+ul  li {
+  background: #b6e0f700;
+  padding: 5px;
+}
+
 .container h2 + * {
   border: 2px solid #000000;
   padding: 10px;
@@ -213,4 +218,111 @@ ul > li {
 .container h2 ~ * {
   background: #f1ff531e;
   border-radius: 6px;
+}
+
+
+/* ========================= */
+/* БЛОКИ ТЕХНІКИ (DIV + FLOAT) */
+/* ========================= */
+
+.appliances {
+  margin-top: 30px;
+}
+
+.appliance-card {
+  width: 45%;
+  padding: 15px;
+  border-radius: 10px;
+  color: #1f2937;
+  position: relative; /* position */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* float */
+.left {
+  float: left;
+  background: #dbeafe;
+}
+
+.right {
+  float: right;
+  background: #e0f2fe;
+}
+
+/* очистка */
+.clear {
+  clear: both;
+}
+
+/* ========================= */
+/* POSITION (бейдж) */
+/* ========================= */
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+/* ========================= */
+/* SPAN (рядковий елемент) */
+/* ========================= */
+
+.inline-text {
+  display: block;
+  margin-top: 10px;
+  color: #dc2626;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* ПСЕВДОКЛАСИ */
+/* ========================= */
+
+.menu a:link {
+  color: #2563eb;
+}
+
+.menu a:visited {
+  color: #7c3aed;
+}
+
+.menu a:hover {
+  color: #dc2626;
+}
+
+.menu a:active {
+  color: #16a34a;
+}
+
+/* ========================= */
+/* FIRST-CHILD */
+/* ========================= */
+
+ol li:first-child {
+  background: #fef3c7;
+  font-weight: bold;
+}
+
+/* ========================= */
+/* ПСЕВДОЕЛЕМЕНТИ */
+/* ========================= */
+
+h1::before {
+  content: "⚡ ";
+}
+
+h1::after {
+  content: " ⚡";
+}
+
+/* ще один приклад */
+.highlight::after {
+  content: " ✔";
+  color: green;
 }
