@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="uk">
 <head>
-
 <meta charset="UTF-8">
 <meta name="author" content="Hytruk Liza">
 <meta name="description" content="Інформаційний сайт про побутову техніку">
@@ -9,16 +8,30 @@
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-
-a{
-color:darkorange;
-}
-
-</style>
-
 <title>Побутова техніка для дому</title>
 
+<script>
+  function chooseAppliance() {
+    alert("Ласкаво просимо до сервісу підбору побутової техніки!");
+
+    let appliance = prompt(
+      "Напишіть, який прилад вас цікавить найбільше:",
+      "пральна машина"
+    );
+
+    if (appliance !== null && appliance.trim() !== "") {
+      let answer = confirm("Показати коротку підказку щодо вибору приладу: " + appliance + "?");
+
+      if (answer) {
+        alert("Скористайтеся сервісами сторінки, щоб отримати поради з вибору та догляду за технікою.");
+      } else {
+        alert("Добре. Ви можете самостійно переглянути тематичні розділи сайту.");
+      }
+    } else {
+      alert("Назву приладу не введено.");
+    }
+  }
+</script>
 </head>
 
 <body bgcolor="#F0F8FF">
@@ -29,37 +42,35 @@ color:darkorange;
 
 <h1>Побутова техніка для дому</h1>
 
-
-
 <div class="menu">
-<a href="index.html">Головна</a> |
-<a href="kitchen.html">Кухонна техніка</a> |
-<a href="cleaning.html">Техніка для прибирання</a> |
-<a href="care.html">Догляд та безпека</a>
+  <a href="index.html">Головна</a> |
+  <a href="kitchen.html">Кухонна техніка</a> |
+  <a href="cleaning.html">Техніка для прибирання</a> |
+  <a href="care.html">Догляд та безпека</a>
 </div>
 
 <hr>
 
 <h2>Сучасні рішення для вашого дому</h2>
 
-<p style="color:green;">
-Сучасна <span class="highlight">побутова техніка</span> робить повсякденне життя зручнішим та комфортнішим.
+<p id="introText" style="color:green;">
+  Сучасна <span class="highlight">побутова техніка</span> робить повсякденне життя зручнішим та комфортнішим.
 </p>
 
-<p>
-Вона допомагає швидко готувати їжу, підтримувати чистоту та економити час.
+<p class="info-paragraph">
+  Вона допомагає швидко готувати їжу, підтримувати чистоту та економити час.
 </p>
 
-<p>
-Правильний вибір та <i>грамотна експлуатація</i> приладів гарантують довготривалу роботу та безпеку.
+<p class="info-paragraph">
+  Правильний вибір та <i>грамотна експлуатація</i> приладів гарантують довготривалу роботу та безпеку.
 </p>
 
 <h2>Основні напрямки</h2>
 
-<div class="appliances">
+<div class="appliances" id="appliancesBlock">
 
   <div class="appliance-card left">
-    <span class="badge">NEW</span>
+    <span class="badge">POPULAR</span>
     <h3>Кухонна техніка</h3>
     <p>Мікрохвильові печі, блендери, мультиварки.</p>
     <span class="inline-text">Економія часу та енергії</span>
@@ -73,50 +84,143 @@ color:darkorange;
   </div>
 
   <div class="clear"></div>
-
 </div>
 
-<ul>
-<li>Прилади для приготування їжі</li>
-<li>Техніка для прання та прибирання</li>
-<li>Енергозберігаючі рішення</li>
+<ul id="advantagesList">
+  <li>Прилади для приготування їжі</li>
+  <li>Техніка для прання та прибирання</li>
+  <li>Енергозберігаючі рішення</li>
 </ul>
 
 <p>
-<a href="kitchen.html">Перейти до кухонної техніки</a>
+  <a href="kitchen.html">Перейти до кухонної техніки</a>
 </p>
 
 <h2>Приклад побутової техніки</h2>
 
 <table border="0">
 <tr>
-
-<td>
-<img src="images/appliances.jpg" width="200">
-</td>
-
-<td>
-<img src="images/appliances.jpg" width="400">
-</td>
-
-<td>
-<a href="images/appliances.jpg" target="_blank">
-<img src="images/appliances.jpg" width="300">
-</a>
-</td>
-
+  <td>
+    <img src="images/appliances.jpg" width="200" alt="Побутова техніка">
+  </td>
+  <td>
+    <img src="images/appliances.jpg" width="400" alt="Побутова техніка">
+  </td>
+  <td>
+    <a href="images/appliances.jpg" target="_blank">
+      <img src="images/appliances.jpg" width="300" alt="Побутова техніка">
+    </a>
+  </td>
 </tr>
 </table>
 
 <p>
-
-Детальніше можна прочитати у 
-
-<a href="https://uk.wikipedia.org/wiki/Побутова_техніка" target="_blank">
-Вікіпедії
-</a>.
-
+  Детальніше можна прочитати у
+  <a href="https://uk.wikipedia.org/wiki/Побутова_техніка" target="_blank">Вікіпедії</a>.
 </p>
+
+<hr>
+
+<div class="smart-panel">
+  <h2>Розумний помічник для дому</h2>
+
+  <p class="smart-panel-description">
+    Тут можна отримати рекомендації щодо побутової техніки, переглянути підказки з догляду та запустити тематичні сценарії підготовки приладів до щоденного використання.
+  </p>
+
+  <div class="main-actions">
+    <button onclick="chooseAppliance()">Підібрати прилад</button>
+    <button onclick="openSupportChat()">Відкрити техпідтримку</button>
+    <button onclick="showDeveloperInfo('Хитрук', 'Ліза')">Інформація про автора</button>
+    <button onclick="compareStrings('Пральна машина', 'Холодильник')">Порівняти назви приладів</button>
+    <button onclick="changeBackgroundFor30Seconds()">Режим комфортного перегляду</button>
+    <button onclick="redirectToKitchen()">Перейти до кухонної техніки</button>
+  </div>
+
+  <div class="panel-grid">
+    <div id="serviceStatus" class="info-card">
+      <h3>Стан сервісу</h3>
+      <p>Тут з’являтимуться повідомлення про підготовку техніки до використання.</p>
+    </div>
+
+    <div id="authorBlock" class="info-card">
+      <h3>Автор сайту</h3>
+      <p>Тут можна переглянути інформацію про розробника сторінки.</p>
+    </div>
+
+    <div id="comparisonBlock" class="info-card">
+      <h3>Корисна примітка</h3>
+      <p>Тут відображатиметься додаткова інформація для відвідувачів.</p>
+    </div>
+
+    <div id="navigationBlock" class="info-card">
+      <h3>Навігація</h3>
+      <p>Тут будуть показані корисні розділи сайту та підказки для користувача.</p>
+    </div>
+  </div>
+
+  <div id="supportChat" class="support-chat">
+    <h3>Мінічат техпідтримки</h3>
+
+    <div class="chat-role-buttons">
+      <button onclick="setChatRole('user')">Я користувач</button>
+      <button onclick="setChatRole('admin')">Я адмін</button>
+    </div>
+
+    <p id="currentRole">Поточна роль: користувач</p>
+
+    <div id="chatMessages" class="chat-messages">
+      <p><b>Система:</b> Натисніть кнопку ролі, введіть повідомлення та надішліть його.</p>
+    </div>
+
+    <div class="chat-input-row">
+      <input id="chatInput" type="text" placeholder="Введіть повідомлення">
+      <button onclick="sendChatMessage()">Надіслати</button>
+    </div>
+  </div>
+</div>
+
+<div class="dom-zone">
+  <h2>Інтерактивний центр догляду</h2>
+
+  <p>Натискайте кнопки нижче, щоб оновлювати вміст   у  сервісі догляду за побутовою технікою.</p>
+
+  <div class="dom-actions">
+    <button onclick="createCareCard()">Створити картку догляду</button>
+    <button onclick="insertDailyAdvice()">Додати пораду дня</button>
+    <button onclick="replaceMainBenefit()">Оновити головну перевагу</button>
+    <button onclick="removeRecommendationCard()">Прибрати одну рекомендацію</button>
+  </div>
+
+  <div class="care-board" id="careBoard">
+    <div class="care-card">
+      <span class="care-tag">Кухня</span>
+      <h3>Кухонні прилади</h3>
+      <p>Очищуйте чаші, ножі, поверхні та знімні деталі після кожного використання.</p>
+      <button type="button" onclick="removeCurrentCard(this)">Прибрати з добірки</button>
+    </div>
+
+    <div class="care-card">
+      <span class="care-tag">Прибирання</span>
+      <h3>Техніка для чистоти</h3>
+      <p>Регулярно перевіряйте фільтри, контейнери та цілісність шнура живлення.</p>
+      <button type="button" onclick="removeCurrentCard(this)">Прибрати з добірки</button>
+    </div>
+
+    <div class="care-card">
+      <span class="care-tag">Безпека</span>
+      <h3>Безпечне використання</h3>
+      <p>Не перевантажуйте розетки та не залишайте електроприлади ввімкненими без нагляду.</p>
+      <button type="button" onclick="removeCurrentCard(this)">Прибрати з добірки</button>
+    </div>
+  </div>
+
+  <div id="domWorkspace"></div>
+</div>
+
+<script>
+  document.write("<p><b>Порада сайту:</b> правильний догляд за побутовою технікою підвищує безпеку користування та подовжує термін служби приладів.</p>");
+</script>
 
 <hr>
 
@@ -125,14 +229,16 @@ color:darkorange;
 <p>Автор сайту: Hytruk Liza</p>
 
 <p class="important" id="important">
-Увага: використовуйте тільки справну техніку.
+  Увага: використовуйте тільки справну техніку.
 </p>
 
 <p>
-<a href="#top">Повернутись вгору</a>
+  <a href="#top">Повернутись вгору</a>
 </p>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
