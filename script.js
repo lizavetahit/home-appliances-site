@@ -131,6 +131,7 @@ function redirectToKitchen() {
   }
 }
 
+
 function updateServiceStatus(text) {
   const serviceStatus = document.getElementById("serviceStatus");
 
@@ -174,16 +175,19 @@ function refreshPageTexts() {
     "Увага: перед використанням побутової техніки перевіряйте стан кабелю, вилки, розетки та чистоту приладу.";
 
   const introParagraph = document.getElementById("introText");
-  const firstTextNode = introParagraph.firstChild;
 
-  if (firstTextNode) {
-    firstTextNode.nodeValue = "Сучасна домашня техніка ";
+  if (introParagraph) {
+    const firstTextNode = introParagraph.firstChild;
+
+    if (firstTextNode) {
+      firstTextNode.nodeValue = "Сучасна домашня техніка ";
+    }
   }
 
-  const highlightNode = document.querySelector(".highlight").firstChild;
+  const highlightElement = document.querySelector(".highlight");
 
-  if (highlightNode) {
-    highlightNode.data = "техніка для безпечного дому";
+  if (highlightElement && highlightElement.firstChild) {
+    highlightElement.firstChild.data = "техніка для безпечного дому";
   }
 
   const comparisonBlock = document.getElementById("comparisonBlock");
@@ -294,6 +298,7 @@ function removeRecommendationCard() {
   }
 }
 
+
 function removeCurrentCard(button) {
   const card = button.closest(".care-card");
 
@@ -302,3 +307,168 @@ function removeCurrentCard(button) {
     updateServiceStatus("Картку прибрано з добірки рекомендацій користувача.");
   }
 }
+
+
+/* =====================================================
+   Консультант з вибору побутової техніки
+   ===================================================== */
+
+
+/* Обробник події миші через атрибут */
+function activateConsultantTitle(element) {
+  element.classList.add("consultant-title-active");
+  updateServiceStatus("Консультант з вибору побутової техніки активний.");
+}
+
+
+/* Обробник події через властивість */
+const personalAdviceButton = document.getElementById("personalAdviceButton");
+
+if (personalAdviceButton) {
+  personalAdviceButton.onclick = function () {
+    alert("Порада: перед покупкою порівняйте потужність, гарантію, клас енергоефективності та відгуки покупців.");
+    updateServiceStatus("Користувач отримав персональну пораду щодо вибору побутової техніки.");
+  };
+}
+
+
+/* addEventListener: одній події призначено різні обробники */
+function showQualityAdvice() {
+  updateServiceStatus("Критерії якості: надійний виробник, гарантія, економне споживання, безпечний корпус і зручне керування.");
+}
+
+
+function markQualityButton() {
+  const qualityCheckButton = document.getElementById("qualityCheckButton");
+
+  if (qualityCheckButton) {
+    qualityCheckButton.classList.add("checked-button");
+  }
+}
+
+
+const qualityCheckButton = document.getElementById("qualityCheckButton");
+
+if (qualityCheckButton) {
+  qualityCheckButton.addEventListener("click", showQualityAdvice);
+  qualityCheckButton.addEventListener("click", markQualityButton);
+}
+
+
+/* Об’єкт як обробник події + handleEvent + event.currentTarget */
+const hoverCheckObject = {
+  handleEvent: function(event) {
+    event.currentTarget.classList.add("hover-checked");
+
+    updateServiceStatus(
+      "Система перевірила блок: " +
+      event.currentTarget.querySelector("h3").textContent
+    );
+
+    console.log("Елемент, на якому спрацював обробник:", event.currentTarget);
+  }
+};
+
+
+const selectedApplianceBlock = document.getElementById("selectedApplianceBlock");
+
+if (selectedApplianceBlock) {
+  selectedApplianceBlock.addEventListener("mouseover", hoverCheckObject);
+}
+
+
+/* removeEventListener: видалення об’єкта-обробника */
+function removeHoverCheckObject() {
+  if (selectedApplianceBlock) {
+    selectedApplianceBlock.removeEventListener("mouseover", hoverCheckObject);
+    selectedApplianceBlock.classList.remove("hover-checked");
+    updateServiceStatus("Перевірку наведення для блоку обраного приладу вимкнено.");
+  }
+}
+
+
+/* Список: один onclick для всього списку + event.target */
+const applianceCatalog = document.getElementById("applianceCatalog");
+
+if (applianceCatalog) {
+  applianceCatalog.onclick = function(event) {
+    if (event.target.tagName === "LI") {
+      const items = applianceCatalog.querySelectorAll("li");
+
+      items.forEach(function(item) {
+        item.classList.remove("catalog-selected");
+      });
+
+      event.target.classList.add("catalog-selected");
+
+      const applianceName = event.target.dataset.name;
+      const applianceInfo = event.target.dataset.info;
+
+      document.getElementById("selectedApplianceInfo").innerHTML =
+        "<b>" + applianceName + "</b><br>" + applianceInfo;
+
+      updateServiceStatus("Користувач обрав прилад: " + applianceName + ".");
+    }
+  };
+}
+
+
+/* Меню: кілька кнопок data-* і один обробник для всього меню */
+const consultantActions = {
+  showEconomyAdvice: function() {
+    updateServiceStatus("Економія: обирайте техніку з класом енергоефективності A або вище та не залишайте прилади у режимі очікування.");
+  },
+
+  showSafetyAdvice: function() {
+    updateServiceStatus("Безпека: не використовуйте пошкоджені кабелі, не перевантажуйте розетки та вимикайте техніку після роботи.");
+  },
+
+  showCareAdvice: function() {
+    updateServiceStatus("Догляд: регулярно очищуйте фільтри, поверхні, контейнери та перевіряйте стан шнура живлення.");
+  },
+
+  turnOffHoverCheck: function() {
+    removeHoverCheckObject();
+  }
+};
+
+
+const consultantMenu = document.getElementById("consultantMenu");
+
+if (consultantMenu) {
+  consultantMenu.addEventListener("click", function(event) {
+    const action = event.target.dataset.action;
+
+    if (action && consultantActions[action]) {
+      consultantActions[action]();
+    }
+  });
+}
+
+
+/* Прийом проєктування «Поведінка» через data-behavior */
+document.addEventListener("click", function(event) {
+  const behavior = event.target.dataset.behavior;
+
+  if (!behavior) {
+    return;
+  }
+
+  if (behavior === "highlight-important") {
+    event.target.classList.toggle("important-buyer-tip");
+    updateServiceStatus("Головну пораду перед покупкою виділено.");
+  }
+
+  if (behavior === "show-care-plan") {
+    const carePlanText = document.getElementById("carePlanText");
+
+    if (carePlanText) {
+      carePlanText.classList.toggle("care-plan-visible");
+      updateServiceStatus("Короткий план догляду за технікою відкрито або приховано.");
+    }
+  }
+
+  if (behavior === "go-kitchen") {
+    location.href = "kitchen.html";
+  }
+});

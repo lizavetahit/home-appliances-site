@@ -551,3 +551,188 @@ h1::after {
   font-size: 12px;
   font-weight: bold;
 }
+
+
+/* Консультант з вибору побутової техніки */
+
+.appliance-consultant{
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #ffffff, #eef7ff);
+  border-radius: 24px;
+  border: 2px solid #bfdbfe;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+}
+
+.appliance-consultant h2{
+  margin-top: 0;
+  color: #1e40af;
+  transition: 0.3s;
+}
+
+.appliance-consultant > p{
+  text-align: center;
+  background: #eff6ff;
+  border-left: none;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.consultant-title-active{
+  color: #0f766e !important;
+  transform: scale(1.02);
+}
+
+.consultant-layout{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.consultant-card{
+  background: white;
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+  text-align: left;
+}
+
+.consultant-card h3{
+  color: #0369a1;
+  margin-top: 0;
+}
+
+.appliance-catalog{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appliance-catalog li{
+  background: #f8fafc;
+  margin: 10px 0;
+  padding: 13px 15px;
+  border-radius: 14px;
+  border: 1px solid #dbeafe;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.appliance-catalog li:hover{
+  background: #dbeafe;
+  transform: translateX(5px);
+}
+
+.catalog-selected{
+  background: #bfdbfe !important;
+  color: #1e3a8a;
+  font-weight: bold;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+}
+
+#selectedApplianceInfo{
+  background: #f8fafc;
+  border-left: 4px solid #60a5fa;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: left;
+}
+
+#personalAdviceButton,
+#qualityCheckButton,
+.consultant-menu button{
+  padding: 12px 16px;
+  margin: 8px 5px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+}
+
+#personalAdviceButton:hover,
+#qualityCheckButton:hover,
+.consultant-menu button:hover{
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.checked-button{
+  background: #16a34a !important;
+}
+
+.hover-checked{
+  border: 2px solid #0f766e;
+  background: #ecfdf5;
+}
+
+.consultant-menu{
+  margin-top: 25px;
+  padding: 18px;
+  background: #f8fafc;
+  border-radius: 18px;
+  border: 1px solid #cbd5e1;
+}
+
+.consultant-menu button{
+  background: #0f766e;
+}
+
+.consultant-menu button:hover{
+  background: #0d5f59;
+}
+
+.buyer-tools{
+  margin-top: 25px;
+  padding: 22px;
+  background: linear-gradient(135deg, #fff7ed, #fffbeb);
+  border-radius: 20px;
+  border: 1px solid #fed7aa;
+}
+
+.buyer-tools h3{
+  color: #c2410c;
+  margin-top: 0;
+}
+
+.buyer-tool{
+  display: inline-block;
+  padding: 12px 16px;
+  margin: 8px;
+  border-radius: 14px;
+  background: #ea580c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.buyer-tool:hover{
+  background: #c2410c;
+  transform: translateY(-2px);
+}
+
+.important-buyer-tip{
+  background: #facc15 !important;
+  color: #422006 !important;
+}
+
+#carePlanText{
+  display: none;
+  background: white;
+  border-left: 4px solid #f97316;
+  padding: 14px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+#carePlanText.care-plan-visible{
+  display: block;
+}

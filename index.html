@@ -183,7 +183,7 @@
 <div class="dom-zone">
   <h2>Інтерактивний центр догляду</h2>
 
-  <p>Натискайте кнопки нижче, щоб оновлювати вміст   у  сервісі догляду за побутовою технікою.</p>
+  <p>Натискайте кнопки нижче, щоб оновлювати вміст у сервісі догляду за побутовою технікою.</p>
 
   <div class="dom-actions">
     <button onclick="createCareCard()">Створити картку догляду</button>
@@ -216,6 +216,95 @@
   </div>
 
   <div id="domWorkspace"></div>
+</div>
+
+<div class="appliance-consultant">
+  <h2 id="consultantTitle" onmouseover="activateConsultantTitle(this)">
+    Консультант з вибору побутової техніки
+  </h2>
+
+  <p>
+    Оберіть техніку зі списку, перегляньте коротку характеристику та скористайтеся порадами для правильного вибору.
+  </p>
+
+  <div class="consultant-layout">
+
+    <div class="consultant-card">
+      <h3>Каталог техніки</h3>
+
+      <ul id="applianceCatalog" class="appliance-catalog">
+        <li data-name="Холодильник" data-info="Підходить для зберігання продуктів. Важливо звертати увагу на об’єм, клас енергоефективності та рівень шуму.">
+          Холодильник
+        </li>
+
+        <li data-name="Пральна машина" data-info="Допомагає швидко прати речі. Важливі параметри: завантаження, кількість програм, витрата води та електроенергії.">
+          Пральна машина
+        </li>
+
+        <li data-name="Пилосос" data-info="Підходить для прибирання пилу та сміття. Варто враховувати потужність, тип фільтра та об’єм контейнера.">
+          Пилосос
+        </li>
+
+        <li data-name="Мікрохвильова піч" data-info="Зручна для швидкого розігріву їжі. Важливі параметри: потужність, об’єм камери та режими роботи.">
+          Мікрохвильова піч
+        </li>
+      </ul>
+    </div>
+
+    <div class="consultant-card" id="selectedApplianceBlock">
+      <h3>Обраний прилад</h3>
+      <p id="selectedApplianceInfo">
+        Натисніть на прилад у каталозі, щоб побачити рекомендацію.
+      </p>
+
+      <button id="personalAdviceButton" type="button">
+        Отримати персональну пораду
+      </button>
+
+      <button id="qualityCheckButton" type="button">
+        Перевірити критерії якості
+      </button>
+    </div>
+
+  </div>
+
+  <div class="consultant-menu" id="consultantMenu">
+    <button type="button" data-action="showEconomyAdvice">
+      Економія електроенергії
+    </button>
+
+    <button type="button" data-action="showSafetyAdvice">
+      Безпечне використання
+    </button>
+
+    <button type="button" data-action="showCareAdvice">
+      Догляд за технікою
+    </button>
+
+    <button type="button" data-action="turnOffHoverCheck">
+      Вимкнути перевірку наведення
+    </button>
+  </div>
+
+  <div class="buyer-tools">
+    <h3>Корисні дії для покупця</h3>
+
+    <div class="buyer-tool" data-behavior="highlight-important">
+      Виділити головну пораду перед покупкою
+    </div>
+
+    <div class="buyer-tool" data-behavior="show-care-plan">
+      Показати короткий план догляду
+    </div>
+
+    <div class="buyer-tool" data-behavior="go-kitchen">
+      Перейти до кухонної техніки
+    </div>
+
+    <p id="carePlanText">
+      План догляду: протирайте поверхні після використання, очищуйте фільтри та не перевантажуйте прилади.
+    </p>
+  </div>
 </div>
 
 <script>
