@@ -309,19 +309,16 @@ function removeCurrentCard(button) {
 }
 
 
-/* =====================================================
-   Консультант з вибору побутової техніки
-   ===================================================== */
 
 
-/* Обробник події миші через атрибут */
+
 function activateConsultantTitle(element) {
   element.classList.add("consultant-title-active");
   updateServiceStatus("Консультант з вибору побутової техніки активний.");
 }
 
 
-/* Обробник події через властивість */
+
 const personalAdviceButton = document.getElementById("personalAdviceButton");
 
 if (personalAdviceButton) {
@@ -332,7 +329,7 @@ if (personalAdviceButton) {
 }
 
 
-/* addEventListener: одній події призначено різні обробники */
+
 function showQualityAdvice() {
   updateServiceStatus("Критерії якості: надійний виробник, гарантія, економне споживання, безпечний корпус і зручне керування.");
 }
@@ -355,7 +352,7 @@ if (qualityCheckButton) {
 }
 
 
-/* Об’єкт як обробник події + handleEvent + event.currentTarget */
+
 const hoverCheckObject = {
   handleEvent: function(event) {
     event.currentTarget.classList.add("hover-checked");
@@ -377,7 +374,7 @@ if (selectedApplianceBlock) {
 }
 
 
-/* removeEventListener: видалення об’єкта-обробника */
+
 function removeHoverCheckObject() {
   if (selectedApplianceBlock) {
     selectedApplianceBlock.removeEventListener("mouseover", hoverCheckObject);
@@ -387,7 +384,7 @@ function removeHoverCheckObject() {
 }
 
 
-/* Список: один onclick для всього списку + event.target */
+
 const applianceCatalog = document.getElementById("applianceCatalog");
 
 if (applianceCatalog) {
@@ -413,7 +410,7 @@ if (applianceCatalog) {
 }
 
 
-/* Меню: кілька кнопок data-* і один обробник для всього меню */
+
 const consultantActions = {
   showEconomyAdvice: function() {
     updateServiceStatus("Економія: обирайте техніку з класом енергоефективності A або вище та не залишайте прилади у режимі очікування.");
@@ -446,7 +443,7 @@ if (consultantMenu) {
 }
 
 
-/* Прийом проєктування «Поведінка» через data-behavior */
+
 document.addEventListener("click", function(event) {
   const behavior = event.target.dataset.behavior;
 
@@ -472,3 +469,135 @@ document.addEventListener("click", function(event) {
     location.href = "kitchen.html";
   }
 });
+
+// =====================================================
+// Конструктор комплекту побутової техніки
+// Використано: mouseover, mouseout, event.target,
+// event.relatedTarget, mousedown, mousemove, mouseup
+// =====================================================
+
+const applianceShelf = document.getElementById("applianceShelf");
+const kitDropArea = document.getElementById("kitDropArea");
+const kitHint = document.getElementById("kitHint");
+
+if (applianceShelf && kitDropArea && kitHint) {
+
+  applianceShelf.addEventListener("mouseover", function(event) {
+    const device = event.target.closest(".kit-device");
+
+    if (!device || !applianceShelf.contains(device)) {
+      return;
+    }
+
+    if (device.contains(event.relatedTarget)) {
+      return;
+    }
+
+    device.classList.add("kit-device-hover");
+
+    kitHint.textContent =
+      device.dataset.name + ": " + device.dataset.info;
+  });
+
+
+  applianceShelf.addEventListener("mouseout", function(event) {
+    const device = event.target.closest(".kit-device");
+
+    if (!device || !applianceShelf.contains(device)) {
+      return;
+    }
+
+    if (device.contains(event.relatedTarget)) {
+      return;
+    }
+
+    device.classList.remove("kit-device-hover");
+
+    kitHint.textContent =
+      "Підказка: перетягніть потрібну техніку у свій домашній комплект.";
+  });
+
+
+  applianceShelf.addEventListener("mousedown", function(event) {
+    const originalDevice = event.target.closest(".kit-device");
+
+    if (!originalDevice || !applianceShelf.contains(originalDevice)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const deviceCopy = originalDevice.cloneNode(true);
+
+    deviceCopy.classList.add("kit-device-dragging");
+
+    document.body.append(deviceCopy);
+
+    deviceCopy.style.position = "absolute";
+    deviceCopy.style.zIndex = "1000";
+    deviceCopy.style.width = originalDevice.offsetWidth + "px";
+
+    const shiftX = event.clientX - originalDevice.getBoundingClientRect().left;
+    const shiftY = event.clientY - originalDevice.getBoundingClientRect().top;
+
+    moveDevice(event.pageX, event.pageY);
+
+    function moveDevice(pageX, pageY) {
+      deviceCopy.style.left = pageX - shiftX + "px";
+      deviceCopy.style.top = pageY - shiftY + "px";
+    }
+
+    function checkDropZone(event) {
+      const zone = kitDropArea.getBoundingClientRect();
+
+      return (
+        event.clientX > zone.left &&
+        event.clientX < zone.right &&
+        event.clientY > zone.top &&
+        event.clientY < zone.bottom
+      );
+    }
+
+    function onMouseMove(event) {
+      moveDevice(event.pageX, event.pageY);
+
+      if (checkDropZone(event)) {
+        kitDropArea.classList.add("kit-drop-area-ready");
+        kitHint.textContent = "Відпустіть прилад, щоб додати його до комплекту.";
+      } else {
+        kitDropArea.classList.remove("kit-drop-area-ready");
+        kitHint.textContent = "Перетягніть прилад у зелену зону комплекту.";
+      }
+    }
+
+    document.addEventListener("mousemove", onMouseMove);
+
+    document.addEventListener("mouseup", function onMouseUp(event) {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+
+      if (checkDropZone(event)) {
+        const addedDevice = originalDevice.cloneNode(true);
+
+        addedDevice.classList.remove("kit-device-hover");
+        addedDevice.classList.remove("kit-device-dragging");
+
+        if (kitDropArea.textContent.trim() === "Перетягніть сюди потрібний прилад") {
+          kitDropArea.innerHTML = "";
+        }
+
+        kitDropArea.append(addedDevice);
+
+        kitHint.textContent =
+          originalDevice.dataset.name + " додано до вашого комплекту побутової техніки.";
+      } else {
+        kitHint.textContent =
+          "Прилад не додано. Перетягніть його точно у зону комплекту.";
+      }
+
+      deviceCopy.remove();
+
+      kitDropArea.classList.remove("kit-drop-area-ready");
+    });
+  });
+}
